@@ -1,0 +1,56 @@
+<Schema name="New Schema1">
+  <Dimension type="StandardDimension" visible="true" name="DimEdad">
+    <Hierarchy name="Edad" visible="true" hasAll="true">
+      <Table name="edad" alias="">
+      </Table>
+      <Level name="grupo" visible="true" column="idEdad" nameColumn="grupo_edad" internalType="int" uniqueMembers="false" levelType="Regular">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Dim_Plataforma">
+    <Hierarchy name="plataforma" visible="true" hasAll="true">
+      <Table name="plataforma" alias="">
+      </Table>
+      <Level name="plataforma" visible="true" table="plataforma" column="idPlataforma" nameColumn="nombre_plataforma" type="String" uniqueMembers="false" levelType="Regular">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="DimGenero">
+    <Hierarchy name="genero" visible="true" hasAll="true">
+      <Table name="genero" alias="">
+      </Table>
+      <Level name="genero" visible="true" table="genero" column="idGenero" nameColumn="nombre_genero" type="String" uniqueMembers="false" levelType="Regular">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="Dim_emocion">
+    <Hierarchy name="Emocion" visible="true" hasAll="true">
+      <Table name="emocion" alias="">
+      </Table>
+      <Level name="emocion" visible="true" table="emocion" column="idEmocion" nameColumn="nombre_emocion" type="String" uniqueMembers="false" levelType="Regular">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Cubo_redes_sociales" visible="true" cache="true" enabled="true">
+    <Table name="uso_de_redes_sociales" alias="">
+    </Table>
+    <DimensionUsage source="DimEdad" name="EDAD" visible="true" foreignKey="idEdad">
+    </DimensionUsage>
+    <DimensionUsage source="Dim_Plataforma" name="PLATAFORMA" visible="true" foreignKey="idPlataforma">
+    </DimensionUsage>
+    <DimensionUsage source="DimGenero" name="GENERO" visible="true" foreignKey="Genero_idGenero">
+    </DimensionUsage>
+    <DimensionUsage source="Dim_emocion" name="EMOCION" visible="true" foreignKey="Emocion_idEmocion">
+    </DimensionUsage>
+    <Measure name="tiempo_uso_diario_minutos" column="tiempo_uso_diario(minutos)" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="publicaciones_por_dia" column="publicaciones_por_dia" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Me_gusta_recibidos" column="me_gusta_recibidos_por_dia" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Comentarios_recibidos_por_dia" column="comentarios_recibidos_por_dia" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Mensajes_enviados_por_dia" column="mensajes_enviados_por_dia" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
